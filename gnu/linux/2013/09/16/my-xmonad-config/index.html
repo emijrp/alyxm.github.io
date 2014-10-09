@@ -1,0 +1,109 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title> My xmonad Config - alyx.io</title><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="author" content="Alyx Mayer"/><meta property="og:title" content=" My xmonad Config"/><meta property="og:site_name" content="alyx.io"/><meta property="og:locale" content="en_GB"/><meta property="og:type" content="article"/><meta property="article:published_time" content="2013/09/16"/><meta property="article:tag" content="xmonadwindow manager"/><meta property="article:section" content="gnu/linux"/><meta name="description" content="After many hours of tweaking, starting on the shores of xmobar/demu and later ending up in gnomeConfig waters, I think I've finally settled on something approaching a completed config. The default gnomeConfig is so close to being perfect, yet it misses out with a lack of libnotify support (and, due to the limitations of the gnome workspace switcher, doesn't handle multiple monitors, but that's for another day)."/><meta property="og:description" content="After many hours of tweaking, starting on the shores of xmobar/demu and later ending up in gnomeConfig waters, I think I've finally settled on something approaching a completed config. The default gnomeConfig is so close to being perfect, yet it misses out with a lack of libnotify support (and, due to the limitations of the gnome workspace switcher, doesn't handle multiple monitors, but that's for another day)."/><meta property="og:image" content="http://alyx.io/images/icon.png"/><meta property="og:image" content="http://alyx.io/images/2013-09-16-my-xmonad-config/thumbnail.png"/><link rel="icon" sizes="any" href="/images/favicon.svg"><link rel="icon" sizes="512x512" href="/images/favicon-512.png"><link rel="icon" sizes="256x256" href="/images/favicon-256.png"><link rel="icon" sizes="128x128" href="/images/favicon-128.png"><link rel="icon" sizes="64x64" href="/images/favicon-64.png"><link rel="icon" sizes="32x32" href="/images/favicon-32.png"><link rel="icon" sizes="16x16" href="/images/favicon-16.png"><link href="/css/style.css" rel="stylesheet"><link href="/feeds/atom.xml" type="application/atom+xml" rel="alternate" title="Article ATOM Feed"></head><body> <nav class="navbar navbar-default navbar-inverse navbar-static-top" role="navigation"><div class="container"><div class="navbar-header"> <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> <a class="navbar-brand" href="/">alyx.io</a></div><div class="collapse navbar-collapse" id="navbar-collapse"><ul class="nav navbar-nav navbar-right"><li > <a href="/pages/about/">About</a></li><li > <a href="/pages/articles/">Articles</a></li><li > <a href="/pages/categories/">Categories</a></li><li > <a href="/educational-resources/">Educational Resources</a></li></ul></div></div> </nav><div class="container content"> <header> <img src="/images/2013-09-16-my-xmonad-config/thumbnail.png" class="img-circle" style="width:150px;height:150px"/><h2> My xmonad Config <br/> <small>gnomeConfig, compton, and X11 urgent notifications</small></h2> </header><main><p>After many hours of tweaking, starting on the shores of xmobar/demu and later ending up in gnomeConfig waters, I think I’ve finally settled on something approaching a completed config. The default gnomeConfig is so close to being perfect, yet it misses out with a lack of libnotify support (and, due to the limitations of the gnome workspace switcher, doesn’t handle multiple monitors, but that’s for another day).</p><p> <a href="/images/2013-09-16-my-xmonad-config/tiling.jpg" class="thumbnail"> <img src="/images/2013-09-16-my-xmonad-config/tiling.jpg"/> </a></p><div class="highlight"><pre><code class="language-bash" data-lang="bash">sudo add-apt-repository ppa:richardgv/compton<span class="p">;</span> sudo apt-get update<span class="p">;</span> sudo apt-get install xmonad libghc-xmonad-dev libghc-xmonad-contrib-dev compton roxterm gnome-panel</code></pre></div><p>If you’re using apt, and a non-exotic display manager, an entry for xmonad/gnome should appear automatically on the log-in screen.</p><hr/><p><center><b>xmonad.hs</b></center></p><div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="kr">import</span> <span class="nn">XMonad</span>
+<span class="kr">import</span> <span class="nn">XMonad.Config.Gnome</span>
+<span class="kr">import</span> <span class="nn">XMonad.Hooks.ManageHelpers</span>
+<span class="kr">import</span> <span class="nn">XMonad.Hooks.UrgencyHook</span>
+<span class="kr">import</span> <span class="nn">XMonad.Actions.CycleWS</span>
+<span class="kr">import</span> <span class="nn">XMonad.Layout.Fullscreen</span>
+<span class="kr">import</span> <span class="nn">XMonad.Layout.NoBorders</span>
+<span class="kr">import</span> <span class="nn">XMonad.Util.NamedWindows</span>
+
+<span class="kr">import</span> <span class="k">qualified</span> <span class="nn">XMonad.StackSet</span> <span class="k">as</span> <span class="n">W</span>
+<span class="kr">import</span> <span class="k">qualified</span> <span class="nn">Data.Map</span> <span class="k">as</span> <span class="n">M</span>
+
+<span class="c1">--------------------------------------------------------------------------------</span>
+<span class="c1">-- Vars:</span>
+<span class="c1">-- </span>
+<span class="nf">myTerminal</span> <span class="ow">=</span> <span class="s">"roxterm"</span> <span class="c1">-- gnome-terminal doesn't set the X11 urgent flag on</span>
+                       <span class="c1">-- the bell character (^G)</span>
+<span class="nf">myBrowser</span>  <span class="ow">=</span> <span class="s">"firefox"</span>
+<span class="nf">myEmail</span>    <span class="ow">=</span> <span class="s">"thundbird"</span>
+<span class="nf">myFileMan</span>  <span class="ow">=</span> <span class="s">"nautilus"</span>
+<span class="nf">myEditor</span>   <span class="ow">=</span> <span class="s">"sublime-text"</span>
+<span class="nf">myMonitor</span>  <span class="ow">=</span> <span class="s">"gnome-system-monitor"</span>
+<span class="nf">myPiracy</span>   <span class="ow">=</span> <span class="s">"transmission-gtk"</span>
+<span class="nf">myMusic</span>    <span class="ow">=</span> <span class="s">"clementine"</span>
+<span class="nf">myFeeds</span>    <span class="ow">=</span> <span class="s">"liferea"</span>
+
+ <span class="c1">-- Blend in with the Ubuntu Ambiance theme</span>
+<span class="nf">myNormalBorderColor</span>  <span class="ow">=</span> <span class="s">"#413F3B"</span>
+<span class="nf">myFocusedBorderColor</span> <span class="ow">=</span> <span class="s">"#A2A094"</span>
+
+<span class="c1">--------------------------------------------------------------------------------</span>
+<span class="c1">-- Urgency Hook:</span>
+<span class="c1">-- </span>
+<span class="c1">-- Use libnotify notifications when the X11 urgent hint is set</span>
+<span class="kr">data</span> <span class="kt">LibNotifyUrgencyHook</span> <span class="ow">=</span> <span class="kt">LibNotifyUrgencyHook</span> <span class="kr">deriving</span> <span class="p">(</span><span class="kt">Read</span><span class="p">,</span> <span class="kt">Show</span><span class="p">)</span>
+<span class="kr">instance</span> <span class="kt">UrgencyHook</span> <span class="kt">LibNotifyUrgencyHook</span> <span class="kr">where</span>
+  <span class="n">urgencyHook</span> <span class="kt">LibNotifyUrgencyHook</span> <span class="n">w</span> <span class="ow">=</span> <span class="kr">do</span>
+    <span class="n">name</span> <span class="ow">&lt;-</span> <span class="n">getName</span> <span class="n">w</span>
+    <span class="n">wins</span> <span class="ow">&lt;-</span> <span class="n">gets</span> <span class="n">windowset</span>
+    <span class="n">whenJust</span> <span class="p">(</span><span class="kt">W</span><span class="o">.</span><span class="n">findTag</span> <span class="n">w</span> <span class="n">wins</span><span class="p">)</span> <span class="p">(</span><span class="n">flash</span> <span class="n">name</span><span class="p">)</span>
+    <span class="kr">where</span> <span class="n">flash</span> <span class="n">name</span> <span class="n">index</span> <span class="ow">=</span> <span class="n">spawn</span> <span class="o">$</span> <span class="s">"notify-send "</span> <span class="o">++</span> <span class="s">"'Workspace "</span>    <span class="o">++</span> <span class="n">index</span>     <span class="o">++</span> <span class="s">"' "</span>
+                                                    <span class="o">++</span> <span class="s">"'Activity in: "</span> <span class="o">++</span> <span class="n">show</span> <span class="n">name</span> <span class="o">++</span> <span class="s">"' "</span>
+                                                    <span class="o">++</span> <span class="s">"--icon=notification-gpm-monitor"</span>
+
+<span class="c1">--------------------------------------------------------------------------------</span>
+<span class="c1">-- Window rules:</span>
+<span class="c1">-- </span>
+<span class="c1">-- To find the property name associated with a program, use</span>
+<span class="c1">-- &gt; xprop | grep WM_CLASS</span>
+<span class="c1">-- and click on the client you're interested in.</span>
+<span class="c1">--</span>
+<span class="nf">myManageHook</span> <span class="ow">=</span> <span class="n">composeAll</span> <span class="p">[</span>
+      <span class="n">title</span>      <span class="o">=?</span> <span class="s">"Bottom Expanded Edge Panel"</span>                   <span class="o">--&gt;</span> <span class="n">doIgnore</span>
+    <span class="p">,</span> <span class="p">(</span><span class="n">className</span> <span class="o">=?</span> <span class="s">"Firefox"</span> <span class="o">&lt;&amp;&amp;&gt;</span> <span class="n">title</span> <span class="o">=?</span> <span class="s">"Library"</span><span class="p">)</span>             <span class="o">--&gt;</span> <span class="n">doFloat</span>
+    <span class="p">,</span> <span class="p">(</span><span class="n">className</span> <span class="o">=?</span> <span class="s">"Firefox"</span> <span class="o">&lt;&amp;&amp;&gt;</span> <span class="n">title</span> <span class="o">=?</span> <span class="s">"Firefox Preferences"</span><span class="p">)</span> <span class="o">--&gt;</span> <span class="n">doFloat</span>
+    <span class="p">,</span> <span class="n">className</span>  <span class="o">=?</span> <span class="s">"File-roller"</span>                                  <span class="o">--&gt;</span> <span class="n">doFloat</span>
+  <span class="p">]</span> <span class="o">&lt;+&gt;</span> <span class="n">composeOne</span> <span class="p">[</span> <span class="n">isFullscreen</span> <span class="o">-?&gt;</span> <span class="n">doFullFloat</span> <span class="p">]</span>
+
+<span class="c1">--------------------------------------------------------------------------------</span>
+<span class="c1">-- Keybinds:</span>
+<span class="c1">-- </span>
+<span class="nf">keysToAdd</span> <span class="n">x</span> <span class="ow">=</span> <span class="p">[</span>
+      <span class="p">((</span><span class="n">modMask</span> <span class="n">x</span> <span class="o">.|.</span> <span class="n">shiftMask</span><span class="p">,</span> <span class="n">xK_Left</span><span class="p">),</span>  <span class="n">prevWS</span><span class="p">)</span> <span class="c1">-- Shift to previous workspace</span>
+    <span class="p">,</span> <span class="p">((</span><span class="n">modMask</span> <span class="n">x</span> <span class="o">.|.</span> <span class="n">shiftMask</span><span class="p">,</span> <span class="n">xK_Right</span><span class="p">),</span> <span class="n">nextWS</span><span class="p">)</span> <span class="c1">-- Shift to next workspace</span>
+    <span class="p">,</span> <span class="p">((</span><span class="n">modMask</span> <span class="n">x</span> <span class="o">.|.</span> <span class="n">shiftMask</span><span class="p">,</span> <span class="n">xK_Down</span><span class="p">),</span>  <span class="n">shiftToPrev</span><span class="p">)</span> <span class="c1">-- Shift window to previous workspace</span>
+    <span class="p">,</span> <span class="p">((</span><span class="n">modMask</span> <span class="n">x</span> <span class="o">.|.</span> <span class="n">shiftMask</span><span class="p">,</span> <span class="n">xK_Up</span><span class="p">),</span>    <span class="n">shiftToNext</span><span class="p">)</span> <span class="c1">-- Shift window to next workspace</span>
+    <span class="p">,</span> <span class="p">((</span><span class="n">modMask</span> <span class="n">x</span> <span class="o">.|.</span> <span class="n">shiftMask</span><span class="p">,</span> <span class="n">xK_f</span><span class="p">),</span> <span class="n">spawn</span> <span class="n">myBrowser</span><span class="p">)</span>
+    <span class="p">,</span> <span class="p">((</span><span class="n">modMask</span> <span class="n">x</span> <span class="o">.|.</span> <span class="n">shiftMask</span><span class="p">,</span> <span class="n">xK_e</span><span class="p">),</span> <span class="n">spawn</span> <span class="n">myEmail</span><span class="p">)</span>
+    <span class="p">,</span> <span class="p">((</span><span class="n">modMask</span> <span class="n">x</span> <span class="o">.|.</span> <span class="n">shiftMask</span><span class="p">,</span> <span class="n">xK_d</span><span class="p">),</span> <span class="n">spawn</span> <span class="n">myFileMan</span><span class="p">)</span>
+    <span class="p">,</span> <span class="p">((</span><span class="n">modMask</span> <span class="n">x</span> <span class="o">.|.</span> <span class="n">shiftMask</span><span class="p">,</span> <span class="n">xK_s</span><span class="p">),</span> <span class="n">spawn</span> <span class="n">myEditor</span><span class="p">)</span>
+    <span class="p">,</span> <span class="p">((</span><span class="n">modMask</span> <span class="n">x</span> <span class="o">.|.</span> <span class="n">shiftMask</span><span class="p">,</span> <span class="n">xK_m</span><span class="p">),</span> <span class="n">spawn</span> <span class="n">myMonitor</span><span class="p">)</span>
+    <span class="p">,</span> <span class="p">((</span><span class="n">modMask</span> <span class="n">x</span> <span class="o">.|.</span> <span class="n">shiftMask</span><span class="p">,</span> <span class="n">xK_p</span><span class="p">),</span> <span class="n">spawn</span> <span class="n">myPiracy</span><span class="p">)</span>
+    <span class="p">,</span> <span class="p">((</span><span class="n">modMask</span> <span class="n">x</span> <span class="o">.|.</span> <span class="n">shiftMask</span><span class="p">,</span> <span class="n">xK_u</span><span class="p">),</span> <span class="n">spawn</span> <span class="n">myMusic</span><span class="p">)</span>
+    <span class="p">,</span> <span class="p">((</span><span class="n">modMask</span> <span class="n">x</span> <span class="o">.|.</span> <span class="n">shiftMask</span><span class="p">,</span> <span class="n">xK_l</span><span class="p">),</span> <span class="n">spawn</span> <span class="n">myFeeds</span><span class="p">)</span>
+  <span class="p">]</span>
+
+<span class="nf">myKeys</span> <span class="n">x</span> <span class="ow">=</span> <span class="n">keys</span> <span class="n">gnomeConfig</span> <span class="n">x</span> <span class="p">`</span><span class="kt">M</span><span class="o">.</span><span class="n">union</span><span class="p">`</span> <span class="kt">M</span><span class="o">.</span><span class="n">fromList</span> <span class="p">(</span><span class="n">keysToAdd</span> <span class="n">x</span><span class="p">)</span>
+
+<span class="c1">--------------------------------------------------------------------------------</span>
+<span class="c1">-- Startup:</span>
+<span class="c1">-- </span>
+<span class="c1">-- Enable compositing for transparency, shaped windows, smooth transitions, etc.</span>
+<span class="c1">--   -f = enable window fading</span>
+<span class="c1">--   -I = opacity step in</span>
+<span class="c1">--   -O = opacity step out</span>
+<span class="c1">--   --backend glx = better performance</span>
+<span class="c1">--   --vsync opengl = doesn't work for all drivers, see 'man compton'</span>
+<span class="c1">-- </span>
+<span class="c1">-- Rebind backward/forward keys to home/end.</span>
+<span class="nf">myStartupHook</span> <span class="ow">::</span> <span class="kt">X</span> <span class="nb">()</span>
+<span class="nf">myStartupHook</span> <span class="ow">=</span> <span class="kr">do</span>
+  <span class="n">spawn</span> <span class="s">"compton -f -I 0.10 -O 0.10 --backend glx --vsync opengl"</span>
+  <span class="n">spawn</span> <span class="s">"notify-send 'Xmonad Started/Recompiled' --icon=emblem-system"</span>
+
+<span class="c1">--------------------------------------------------------------------------------</span>
+<span class="c1">-- Main:</span>
+<span class="c1">-- </span>
+<span class="nf">main</span> <span class="ow">=</span> <span class="n">xmonad</span>
+  <span class="o">$</span> <span class="n">withUrgencyHook</span> <span class="kt">LibNotifyUrgencyHook</span>
+  <span class="o">$</span> <span class="n">gnomeConfig</span> <span class="p">{</span>
+      <span class="n">keys</span> <span class="ow">=</span> <span class="n">myKeys</span>
+    <span class="p">,</span> <span class="n">terminal</span> <span class="ow">=</span> <span class="n">myTerminal</span>
+    <span class="p">,</span> <span class="n">layoutHook</span>  <span class="ow">=</span> <span class="p">(</span><span class="n">fullscreenFloat</span> <span class="o">.</span> <span class="n">fullscreenFull</span><span class="p">)</span> <span class="o">$</span> <span class="n">smartBorders</span> <span class="o">$</span> <span class="n">layoutHook</span> <span class="n">gnomeConfig</span>
+    <span class="p">,</span> <span class="n">manageHook</span>  <span class="ow">=</span> <span class="n">myManageHook</span>  <span class="o">&lt;+&gt;</span> <span class="n">manageHook</span>  <span class="n">gnomeConfig</span>
+    <span class="p">,</span> <span class="n">startupHook</span> <span class="ow">=</span> <span class="n">myStartupHook</span> <span class="o">&lt;+&gt;</span> <span class="n">startupHook</span> <span class="n">gnomeConfig</span>
+    <span class="p">,</span> <span class="n">handleEventHook</span> <span class="ow">=</span> <span class="n">fullscreenEventHook</span> <span class="o">&lt;+&gt;</span> <span class="n">handleEventHook</span> <span class="n">gnomeConfig</span>
+    <span class="p">,</span> <span class="n">normalBorderColor</span>  <span class="ow">=</span> <span class="n">myNormalBorderColor</span>
+    <span class="p">,</span> <span class="n">focusedBorderColor</span> <span class="ow">=</span> <span class="n">myFocusedBorderColor</span>
+  <span class="p">}</span></code></pre></div><hr/><p>Additionally, I use Synapse as my general-purpose launcher:</p><p><a href="/images/2013-09-16-my-xmonad-config/synapse.jpg" class="thumbnail"><img src="/images/2013-09-16-my-xmonad-config/synapse.jpg"/></a></p><div class="highlight"><pre><code class="language-bash" data-lang="bash">sudo apt-get install synapse</code></pre></div></main><hr/><div id="disqus_thread"></div> <script>var disqus_shortname="alyxio";!function(){var e=document.createElement("script");e.type="text/javascript",e.async=!0,e.src="//"+disqus_shortname+".disqus.com/embed.js",(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(e)}()</script><hr/><div class="text-center"><ul class="pagination"><li><a href="/social-justice/2013/07/24/men-should-do-more-childcare-than-women/" title="Prev Post: Men Should do More Childcare than Women">← Prev</a></li><li><a href="/pages/articles/" title="Post Archives">☰</a></li><li><a href="/marxism/2013/09/22/beginners-guide-to-thinking-critically-about-soviet-union/" title="Next Post: A Brief Beginner's Guide to Thinking Critically About the pre-Khrushchev Soviet Union">Next →</a></li></ul></div></div> <script src="/js/scripts.js"></script><script data-no-instant src="/js/instantclick.js"></script><script>$(function(){return $("h2, h3, h4, h5, h6").each(function(a,h){var r,t;return r=$(h),t=r.attr("id"),t?r.append($("<a />").addClass("header-link").attr("href","#"+t).html("\xa7")):void 0})})</script><script data-no-instant>!function(n,e,a,t,c,o,i){n.GoogleAnalyticsObject=c,n[c]=n[c]||function(){(n[c].q=n[c].q||[]).push(arguments)},n[c].l=1*new Date,o=e.createElement(a),i=e.getElementsByTagName(a)[0],o.async=1,o.src=t,i.parentNode.insertBefore(o,i)}(window,document,"script","//www.google-analytics.com/analytics.js","ga"),ga("create","UA-42712505-1","alyx.io"),InstantClick.on("change",function(){ga("send","pageview",location.pathname+location.search)}),InstantClick.init()</script></body></html>
