@@ -1,4 +1,5 @@
-/*!
+/*! AnchorJS - v0.1.0 - 2014-08-17 | https://github.com/bryanbraun/anchorjs | Copyright (c) 2014 Bryan Braun; Licensed MIT */
+function addAnchors(t){t=t||"h2, h3, h4, h5, h6";for(var e=document.querySelectorAll(t),n=0;n<e.length;n++){var i;if(e[n].hasAttribute("id")&&e[n].getElementsByTagName("a").length<1){i=e[n].getAttribute("id");var o='<a class="anchor-link" href="#'+i+'"><span class="icon-link"></span></a>';e[n].innerHTML=e[n].innerHTML+o}}}/*!
  * Bootstrap v3.1.1 (http://getbootstrap.com)
  * Copyright 2011-2014 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
