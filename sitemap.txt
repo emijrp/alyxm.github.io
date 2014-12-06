@@ -8,8 +8,8 @@ http://alyx.io/educational-resources/class/
 http://alyx.io/educational-resources/disability/
 http://alyx.io/educational-resources/gender/
 http://alyx.io/educational-resources/general/
-http://alyx.io/educational-resources/
 http://alyx.io/
+http://alyx.io/educational-resources/
 http://alyx.io/educational-resources/race/
 http://alyx.io/educational-resources/sexuality/
 http://alyx.io/sitemap.txt
