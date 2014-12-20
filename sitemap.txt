@@ -15,6 +15,7 @@ http://alyx.io/educational-resources/sexuality/
 http://alyx.io/sitemap.txt
 http://alyx.io/educational-resources/trans/
 
+http://alyx.io/feminism/2014/12/17/the-eroticisation-of-gender/
 http://alyx.io/capitalism/2014/09/29/how-much-of-world-labour-is-performed-by-women/
 http://alyx.io/capitalism/2014/07/19/hate-united-kingdom/
 http://alyx.io/gnu/linux/2014/06/16/quotations-from-chairman-mao-unix-fortunes/
