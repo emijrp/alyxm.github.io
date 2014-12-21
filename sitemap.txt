@@ -1,15 +1,15 @@
 
 http://alyx.io/404.html
-http://alyx.io/pages/about/
-http://alyx.io/pages/articles/
-http://alyx.io/feeds/atom.xml
-http://alyx.io/pages/categories/
+http://alyx.io/about/
+http://alyx.io/articles/
+http://alyx.io/atom.xml
+http://alyx.io/categories/
 http://alyx.io/educational-resources/class/
 http://alyx.io/educational-resources/disability/
 http://alyx.io/educational-resources/gender/
 http://alyx.io/educational-resources/general/
-http://alyx.io/
 http://alyx.io/educational-resources/
+http://alyx.io/
 http://alyx.io/educational-resources/race/
 http://alyx.io/educational-resources/sexuality/
 http://alyx.io/sitemap.txt
