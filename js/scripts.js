@@ -1,3 +1,4 @@
+/*! jQuery v1.11.0 | (c) 2005, 2014 jQuery Foundation, Inc. | jquery.org/license */
 /*! AnchorJS - v0.1.0 - 2014-08-17 | https://github.com/bryanbraun/anchorjs | Copyright (c) 2014 Bryan Braun; Licensed MIT */
 function addAnchors(t){t=t||"h2, h3, h4, h5, h6";for(var e=document.querySelectorAll(t),n=0;n<e.length;n++){var i;if(e[n].hasAttribute("id")&&e[n].getElementsByTagName("a").length<1){i=e[n].getAttribute("id");var o='<a class="anchor-link" href="#'+i+'"><span class="icon-link"></span></a>';e[n].innerHTML=e[n].innerHTML+o}}}/*!
  * Bootstrap v3.3.0 (http://getbootstrap.com)

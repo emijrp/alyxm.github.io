@@ -1,9 +1,13 @@
 
 http://alyx.io/404.html
 http://alyx.io/about/
+http://alyx.io/pages/about/
+http://alyx.io/pages/articles/
 http://alyx.io/articles/
 http://alyx.io/atom.xml
+http://alyx.io/feeds/atom.xml
 http://alyx.io/categories/
+http://alyx.io/pages/categories/
 http://alyx.io/educational-resources/class/
 http://alyx.io/educational-resources/disability/
 http://alyx.io/educational-resources/gender/
