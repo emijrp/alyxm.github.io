@@ -46,17 +46,6 @@ header {
 	margin: 0px 0px;
 }
 
-/* footnote */
-/* ########################################################################## */
-/* the markdown processor wraps the footnote text inside a <p> tag, leaving the
- * hash jump link outside the tag, adding an extraneous new line between them */
-.footnotes p {
-	display: inline;
-}
-
-.footnote::before { content: "["; }
-.footnote::after  { content: "]"; }
-
 /* typography */
 /* ########################################################################## */
 h1 { font-size: 28px; }
@@ -78,6 +67,18 @@ blockquote {
 	margin-bottom: 1em;
 	margin-top: 1em
 }
+
+/* footnote */
+/* ########################################################################## */
+/* the markdown processor wraps the footnote text inside a <p> tag, leaving the
+ * hash jump link outside the tag, adding an extraneous new line between them */
+.footnotes p {
+	display: inline;
+	font-size: 13px;
+}
+
+.footnote::before { content: "["; }
+.footnote::after  { content: "]"; }
 
 /* images */
 /* ########################################################################## */
