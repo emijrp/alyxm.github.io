@@ -1,4 +1,114 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title> Binding ctrl+(shift+)tab in GTK3 - alyx.io</title><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="author" content="Alyx Mayer"/><meta property="og:title" content=" Binding ctrl+(shift+)tab in GTK3"/><meta property="og:site_name" content="alyx.io"/><meta property="og:locale" content="en_GB"/><meta property="og:type" content="article"/><meta property="article:published_time" content="2014/03/02"/><meta property="article:tag" content="GTK3"/><meta property="article:section" content="programming"/><meta name="description" content="Pressing 'ctrl+shift+tab', 'ctrl+tab', and 'shift+tab' never fires a 'key-pressed-event', but is instead gobbled up internally by GTK3 and used to switch the currently focused widget. This article provides a solution."/><meta property="og:description" content="Pressing 'ctrl+shift+tab', 'ctrl+tab', and 'shift+tab' never fires a 'key-pressed-event', but is instead gobbled up internally by GTK3 and used to switch the currently focused widget. This article provides a solution."/><meta property="og:image" content="http://alyx.io/images/icon.png"/><meta property="og:image" content="http://alyx.io/images/2014-03-02-ctrl-(shift)-tab-shortcut-in-gtk3/thumbnail.png"/><link rel="icon" sizes="any" href="/images/favicon.svg"><link rel="icon" sizes="512x512" href="/images/favicon-512.png"><link rel="icon" sizes="256x256" href="/images/favicon-256.png"><link rel="icon" sizes="128x128" href="/images/favicon-128.png"><link rel="icon" sizes="64x64" href="/images/favicon-64.png"><link rel="icon" sizes="32x32" href="/images/favicon-32.png"><link rel="icon" sizes="16x16" href="/images/favicon-16.png"><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"><link rel="stylesheet" href="/css/style.css"><link href="/atom.xml" type="application/atom+xml" rel="alternate" title="ATOM Feed"></head><body> <nav class="navbar navbar-default navbar-inverse navbar-static-top"><div class="container"><div class="navbar-header"> <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> <a class="navbar-brand" href="/">alyx.io</a></div><div class="collapse navbar-collapse" id="navbar-collapse"><ul class="nav navbar-nav navbar-right"><li > <a href="/about/">About</a></li><li > <a href="/articles/">Articles</a></li><li > <a href="/categories/">Categories</a></li><li > <a href="/educational-resources/">Educational Resources</a></li></ul></div></div> </nav><div class="container content"> <header> <img src="/images/2014-03-02-ctrl-(shift)-tab-shortcut-in-gtk3/thumbnail.png" class="img-circle" style="width:150px;height:150px"/><h1> Binding ctrl+(shift+)tab in GTK3</h1> </header><main><h3 id="problem">Problem</h3><p>Pressing <code>ctrl+shift+tab</code>, <code>ctrl+tab</code>, and <code>shift+tab</code> never fires a <code>key-pressed-event</code>, but is instead gobbled up internally by GTK3 and used to switch the currently focused widget.</p><p>This is especially annoying when dealing with the <code>GtkNotebook</code> widget, as the de-facto, cross-platform, standard for switching tabs involves, well, the tab button. The “alternative” shortcut GTK3 offers is <code>ctrl+pageup</code>/<code>ctrl+pagedown</code> but this is by all accounts, objectively inferior. It requires two hands, and switching between tab-forwards and tab-backwards mode requires moving a finger across keys (whereas the normal shortcut only requires lifting one finger).</p><h3 id="solution">Solution</h3><p>GTK3 offers the <code>focus</code> signal which is emitted by the currently focused widget every time <code>tab</code> or <code>shift+tab</code> is pressed. This is intended to be overridden if the programmer is creating their own widget, but we can use it for our purposes and instead of changing the focused widget, switch the active tab in our notebook. Since the actual tab switching has to happen inside the <code>focus</code> callback we’ll also need <code>key-pressed-event</code> and <code>key-released-event</code> callbacks to record inside a global variable whether the control key is currently pressed or not.</p><div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="kt">bool</span> <span class="n">controlPressed</span><span class="p">;</span>
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		
+		<title> Binding ctrl+(shift+)tab in GTK3 - alyx.io</title>
+		
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="author"   content="Alyx Mayer" />
+		
+		<meta property="og:title"     content=" Binding ctrl+(shift+)tab in GTK3" />
+		<meta property="og:site_name" content="alyx.io" />
+		<meta property="og:locale"    content="en_GB" />
+		
+		
+			<meta property="og:type"                content="article" />
+			<meta property="article:published_time" content="2014/03/02" />
+			<meta property="article:tag"            content="GTK3"     />
+			<meta property="article:section"        content="programming" />
+		
+		
+		
+			<meta name="description"        content="Pressing 'ctrl+shift+tab', 'ctrl+tab', and 'shift+tab' never fires a 'key-pressed-event', but is instead gobbled up internally by GTK3 and used to switch the currently focused widget. This article provides a solution." />
+			<meta property="og:description" content="Pressing 'ctrl+shift+tab', 'ctrl+tab', and 'shift+tab' never fires a 'key-pressed-event', but is instead gobbled up internally by GTK3 and used to switch the currently focused widget. This article provides a solution." />
+		
+		
+		<meta property="og:image" content="http://alyx.io/images/icon.png" />
+		
+			<meta property="og:image" content="http://alyx.io/images/2014-03-02-ctrl-(shift)-tab-shortcut-in-gtk3/thumbnail.png" />
+		
+		
+		<link rel="icon" sizes="any"     href="/images/favicon.svg">
+		<link rel="icon" sizes="512x512" href="/images/favicon-512.png">
+		<link rel="icon" sizes="256x256" href="/images/favicon-256.png">
+		<link rel="icon" sizes="128x128" href="/images/favicon-128.png">
+		<link rel="icon" sizes="64x64"   href="/images/favicon-64.png">
+		<link rel="icon" sizes="32x32"   href="/images/favicon-32.png">
+		<link rel="icon" sizes="16x16"   href="/images/favicon-16.png">
+		
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/css/style.css">
+		
+		<link href="/atom.xml" type="application/atom+xml" rel="alternate" title="ATOM Feed">
+	</head>
+	
+	<body>
+		<nav class="navbar navbar-default navbar-inverse navbar-static-top">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					
+					<a class="navbar-brand" href="/">alyx.io</a>
+				</div>
+				
+				<div class="collapse navbar-collapse" id="navbar-collapse">
+					<ul class="nav navbar-nav navbar-right">
+						<li >
+							<a href="/about/">About</a>
+						</li>
+						
+						<li >
+							<a href="/articles/">Articles</a>
+						</li>
+						
+						<li >
+							<a href="/categories/">Categories</a>
+						</li>
+						
+						<li >
+							<a href="/educational-resources/">Educational Resources</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		
+		<div class="container content">
+			<header>
+	<img src="/images/2014-03-02-ctrl-(shift)-tab-shortcut-in-gtk3/thumbnail.png" class="img-circle" style="width:150px; height:150px" />
+	
+	<h1>
+		Binding ctrl+(shift+)tab in GTK3
+		
+		
+	</h1>
+</header>
+
+<!-- #### Attribution -->
+
+
+<!-- #### Content Note -->
+
+
+<!-- #### Content -->
+<main>
+	<h3 id="problem">Problem</h3>
+
+<p>Pressing <code>ctrl+shift+tab</code>, <code>ctrl+tab</code>, and <code>shift+tab</code> never fires a <code>key-pressed-event</code>, but is instead gobbled up internally by GTK3 and used to switch the currently focused widget.</p>
+
+<p>This is especially annoying when dealing with the <code>GtkNotebook</code> widget, as the de-facto, cross-platform, standard for switching tabs involves, well, the tab button. The “alternative” shortcut GTK3 offers is <code>ctrl+pageup</code>/<code>ctrl+pagedown</code> but this is by all accounts, objectively inferior. It requires two hands, and switching between tab-forwards and tab-backwards mode requires moving a finger across keys (whereas the normal shortcut only requires lifting one finger).</p>
+
+<h3 id="solution">Solution</h3>
+
+<p>GTK3 offers the <code>focus</code> signal which is emitted by the currently focused widget every time <code>tab</code> or <code>shift+tab</code> is pressed. This is intended to be overridden if the programmer is creating their own widget, but we can use it for our purposes and instead of changing the focused widget, switch the active tab in our notebook. Since the actual tab switching has to happen inside the <code>focus</code> callback we’ll also need <code>key-pressed-event</code> and <code>key-released-event</code> callbacks to record inside a global variable whether the control key is currently pressed or not.</p>
+
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="kt">bool</span> <span class="n">controlPressed</span><span class="p">;</span>
 
 <span class="c1">// user_data = whether this is a callback for a keydown (else a keyup)</span>
 <span class="kt">bool</span> <span class="nf">control_key_checker</span><span class="p">(</span><span class="n">GtkWidget</span> <span class="o">*</span><span class="n">widget</span><span class="p">,</span> <span class="n">GdkEventKey</span> <span class="o">*</span><span class="n">event</span><span class="p">,</span>
@@ -6,7 +116,7 @@
 <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">keyval</span> <span class="o">==</span> <span class="n">GDK_KEY_Control_L</span><span class="p">)</span>
         <span class="n">controlPressed</span> <span class="o">=</span> <span class="p">(</span><span class="kt">bool</span><span class="p">)</span><span class="n">user_data</span><span class="p">;</span>
-
+    
     <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
 <span class="p">}</span>
 
@@ -18,28 +128,75 @@
         <span class="kt">int</span> <span class="n">last</span>    <span class="o">=</span> <span class="n">gtk_notebook_get_n_pages</span><span class="p">(</span><span class="n">GTK_NOTEBOOK</span><span class="p">(</span><span class="n">user_data</span><span class="p">))</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
         <span class="kt">int</span> <span class="n">current</span> <span class="o">=</span> <span class="n">gtk_notebook_get_current_page</span><span class="p">(</span><span class="n">GTK_NOTEBOOK</span><span class="p">(</span><span class="n">user_data</span><span class="p">));</span>
         <span class="kt">int</span> <span class="n">next</span><span class="p">;</span>
-
+        
         <span class="k">if</span> <span class="p">(</span><span class="n">direction</span><span class="p">)</span>
             <span class="n">next</span> <span class="o">=</span> <span class="p">(</span><span class="n">current</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">?</span> <span class="nl">last</span> <span class="p">:</span> <span class="n">current</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
         <span class="k">else</span>
             <span class="n">next</span> <span class="o">=</span> <span class="p">(</span><span class="n">current</span> <span class="o">==</span> <span class="n">last</span> <span class="o">?</span> <span class="mi">0</span> <span class="o">:</span> <span class="n">current</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
-
+        
         <span class="n">gtk_notebook_set_current_page</span><span class="p">(</span><span class="n">GTK_NOTEBOOK</span><span class="p">(</span><span class="n">user_data</span><span class="p">),</span> <span class="n">next</span><span class="p">);</span>
     <span class="p">}</span>
-
+    
     <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
-<span class="p">}</span></code></pre></div><div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
+<span class="p">}</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
 <span class="p">{</span>
     <span class="p">[...]</span>
-
-    <span class="n">g_signal_connect</span><span class="p">(</span><span class="n">window</span><span class="p">,</span> <span class="s">"focus"</span><span class="p">,</span>
+    
+    <span class="n">g_signal_connect</span><span class="p">(</span><span class="n">window</span><span class="p">,</span> <span class="s">&quot;focus&quot;</span><span class="p">,</span>
         <span class="n">G_CALLBACK</span><span class="p">(</span><span class="n">notebook_tab_shortcut</span><span class="p">),</span> <span class="p">(</span><span class="n">gpointer</span><span class="p">)</span><span class="n">notebook</span><span class="p">);</span>
-
-    <span class="n">g_signal_connect</span><span class="p">(</span><span class="n">window</span><span class="p">,</span> <span class="s">"key-press-event"</span><span class="p">,</span>
+    
+    <span class="n">g_signal_connect</span><span class="p">(</span><span class="n">window</span><span class="p">,</span> <span class="s">&quot;key-press-event&quot;</span><span class="p">,</span>
         <span class="n">G_CALLBACK</span><span class="p">(</span><span class="n">control_key_checker</span><span class="p">),</span> <span class="p">(</span><span class="n">gpointer</span><span class="p">)</span><span class="nb">true</span><span class="p">);</span>
-
-    <span class="n">g_signal_connect</span><span class="p">(</span><span class="n">window</span><span class="p">,</span> <span class="s">"key-release-event"</span><span class="p">,</span>
+    
+    <span class="n">g_signal_connect</span><span class="p">(</span><span class="n">window</span><span class="p">,</span> <span class="s">&quot;key-release-event&quot;</span><span class="p">,</span>
         <span class="n">G_CALLBACK</span><span class="p">(</span><span class="n">control_key_checker</span><span class="p">),</span> <span class="p">(</span><span class="n">gpointer</span><span class="p">)</span><span class="nb">false</span><span class="p">);</span>
-
+    
     <span class="p">[...]</span>
-<span class="p">}</span></code></pre></div><p>A full, runable, example is available <a href="/uploads/2014-03-02-ctrl-(shift)-tab-shortcut-in-gtk3/gtk-tab-shortcut.cpp">here</a>.</p></main><hr/><nav class="text-center"><ul class="pagination"><li><a href="/capitalism/2014/01/21/corporate-profit-world-hunger/" title="Prev Post: Solving World Hunger in 6.9 Days – The 256 Most Profitable Corporations">← Prev</a></li><li><a href="/articles/" title="Post Archives">☰</a></li><li><a href="/marxism/2014/04/29/notes-on-innovation-in-socialism/" title="Next Post: 12 Notes on Innovation in Socialism and Communism">Next →</a></li></ul> </nav></div> <script src="/js/anchor.js"></script><script data-no-instant src="https://code.jquery.com/jquery-1.11.1.min.js"></script><script data-no-instant src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script><script data-no-instant src="/js/instantclick.js"></script><script data-no-instant>!function(n,e,a,t,c,o,i){n.GoogleAnalyticsObject=c,n[c]=n[c]||function(){(n[c].q=n[c].q||[]).push(arguments)},n[c].l=1*new Date,o=e.createElement(a),i=e.getElementsByTagName(a)[0],o.async=1,o.src=t,i.parentNode.insertBefore(o,i)}(window,document,"script","//www.google-analytics.com/analytics.js","ga"),ga("create","UA-42712505-1","alyx.io"),InstantClick.on("change",function(){ga("send","pageview",location.pathname+location.search)}),InstantClick.init()</script><script>addAnchors()</script></body></html>
+<span class="p">}</span></code></pre></div>
+
+<p>A full, runable, example is available <a href="/uploads/2014-03-02-ctrl-(shift)-tab-shortcut-in-gtk3/gtk-tab-shortcut.cpp">here</a>.</p>
+
+</main>
+
+<!-- #### Pagination -->
+<hr />
+
+<nav class="text-center">
+	<ul class="pagination">
+		
+			<li><a href="/capitalism/2014/01/21/corporate-profit-world-hunger/" title="Prev Post: Solving World Hunger in 6.9 Days – The 256 Most Profitable Corporations">← Prev</a></li>
+		
+		
+		<li><a href="/articles/" title="Post Archives">☰</a></li>
+		
+		
+			<li><a href="/marxism/2014/04/29/notes-on-innovation-in-socialism/" title="Next Post: 12 Notes on Innovation in Socialism and Communism">Next →</a></li>
+		
+	</ul>
+</nav>
+
+		</div>
+		
+		<script src="/js/anchor.js"></script>
+		<script data-no-instant src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+		<script data-no-instant src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+		<script data-no-instant src="/js/instantclick.js"></script>
+		<script data-no-instant>
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+			
+			ga('create', 'UA-42712505-1', 'alyx.io');
+			
+			InstantClick.on('change', function() {
+				ga('send', 'pageview', location.pathname + location.search);
+			});
+			
+			InstantClick.init();
+		</script>
+		<script>addAnchors();</script>
+	</body>
+</html>
