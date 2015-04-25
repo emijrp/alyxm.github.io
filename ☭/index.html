@@ -19,14 +19,19 @@
 
 			.spin-right {
 				animation: spin-right 0.5s linear infinite;
+				-webkit-animation: spin-right 0.5s linear infinite;
 			}
 
 			.spin-left {
 				animation: spin-left 0.5s linear infinite;
+				-webkit-animation: spin-left 0.5s linear infinite;
 			}
 
-			@keyframes spin-right { 100% { transform:rotate( 360deg); } }
-			@keyframes spin-left  { 100% { transform:rotate(-360deg); } }
+			@keyframes spin-right { 100% { transform: rotate( 360deg); } }
+			@keyframes spin-left  { 100% { transform: rotate(-360deg); } }
+
+			@-webkit-keyframes spin-right { 100% { -webkit-transform: rotate( 360deg); } }
+			@-webkit-keyframes spin-left  { 100% { -webkit-transform: rotate(-360deg); } }
 		</style>
 	</head>
 	<body>
