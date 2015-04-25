@@ -8,43 +8,41 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 		<style>
 			html, body {
-				height: 100%;
 				background: radial-gradient(circle farthest-side at center, #EE0000 0%, #990000 100%);
 			}
 
-			.center-table {
-				height: 100%;
-				width: 100%;
-				display: table;
-			}
-
-			.center-cell {
-				display: table-cell;
-				vertical-align: middle;
-				text-align: center;
-			}
-
-			.big-text {
-				font-size: 320px;
-				color: #EEEE00;
-				text-shadow: 0px 0px 50px #EEEE00;
-			}
-
-			.small-text {
+			.text {
 				font-size: 120px;
 				color: #EEEE00;
 				text-shadow: 0px 0px 50px #EEEE00;
 			}
+
+			.spin-right {
+				animation: spin-right 0.5s linear infinite;
+			}
+
+			.spin-left {
+				animation: spin-left 0.5s linear infinite;
+			}
+
+			@keyframes spin-right { 100% { transform:rotate( 360deg); } }
+			@keyframes spin-left  { 100% { transform:rotate(-360deg); } }
 		</style>
 	</head>
 	<body>
-		<div class="center-table">
-			<div class="center-cell">
-				<div class="big-text">☭</div>
+		<div class="container">
+			<div class="row">
+				<img class="col-xs-12 col-sm-4 spin-right" src="/☭/hoxha.png">
+				<img class="col-xs-12 col-sm-4 spin-left"  src="/☭/bunker.png">
+				<img class="col-xs-12 col-sm-4 spin-right" src="/☭/hoxha.png">
 
-				<!-- <div class="small-text">☭</div> -->
+				<div class="col-xs-12 col-sm-12 text">☭ hoxha hardcore ☭</div>
 			</div>
 		</div>
+
+		<audio autoplay loop>
+			<source src="/☭/hoxha.ogg" type="audio/ogg" />
+		</audio>
 		
 		<script data-no-instant src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
 		<script data-no-instant src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
