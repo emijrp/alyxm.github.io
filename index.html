@@ -32,7 +32,7 @@
 		<link rel="icon" sizes="32x32"   href="/images/favicon-32.png">
 		<link rel="icon" sizes="16x16"   href="/images/favicon-16.png">
 		
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/css/style.css">
 		
 		<link href="/atom.xml" type="application/atom+xml" rel="alternate" title="ATOM Feed">
@@ -69,17 +69,22 @@
 						<li >
 							<a href="/mim-theory/">MIM Theory</a>
 						</li>
-
-						<li >
-							<a href="/educational-resources/">Educational Resources</a>
-						</li>
 					</ul>
 				</div>
 			</div>
 		</nav>
 		
-		<div class="container content">
+		<div class="container">
 			<header>
+				<h1>
+					Home
+					
+					
+				</h1>
+			</header>
+
+			<div class="content">
+				<!-- <header>
 	
 	
 	<h1>
@@ -87,19 +92,10 @@
 		
 		
 	</h1>
-</header>
+</header> -->
 
 <main>
-	<h3 id="about">About</h3>
-
-<p>Article topics include programming, technology, GNU/Linux, and politics… but mostly politics. Brought to you by a Marxist-Third Worldist, feminist, autistic, lesbian, trans woman.</p>
-
-<p>Member of the <a href="http://revolutionaryaim.org/">Revolutionary Anti-Imperialist Movement</a> (RAIM), usual disclaimer applies. I am in the process of setting up a UK RAIM cell. Please contact me if you are interested.</p>
-
-<hr />
-
-<h3 id="latest-articles">Latest Articles</h3>
-
+	
 <div class="row">
 	<div class="col-sm-2 text-center">
 		<div class="hidden-xs"><br /></div>
@@ -113,7 +109,7 @@
 		<h3>
 			<a href="/feminism/2015/06/14/is-gender-inherently-oppressive/">Is Gender Inherently Oppressive?</a>
 			<br />
-			<small>Has gender always existed?</small>
+			<small></small>
 		</h3>
 		
 		<p>Communists say that gender is an imminent reality today due to class society. Gender is fundamentally and irrevocably a hierarchy of oppression, exploitation, and domination. The genesis of gender is in the genesis of oppression and exploitation, and the exodus of gender is in the exodus of oppression and exploitation.</p>
@@ -190,11 +186,13 @@
 
 </main>
 
+			</div>
 		</div>
 		
 		<script src="/js/anchor.js"></script>
 		<script data-no-instant src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-		<script data-no-instant src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+		<script data-no-instant src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		<script data-no-instant src="https://cdnjs.cloudflare.com/ajax/libs/trianglify/0.2.1/trianglify.min.js"></script>
 		<script data-no-instant src="/js/instantclick.js"></script>
 		<script data-no-instant>
 			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -211,5 +209,15 @@
 			InstantClick.init();
 		</script>
 		<script>addAnchors();</script>
+		<script>
+			var pattern = Trianglify({
+				width: $("header").innerWidth(),
+				height: $("header").innerHeight(),
+				cell_size: 30,
+				x_colors: "RdYlBu",
+				y_colors: "match_x"
+			});
+			$("header").css("background-image", "url(" + pattern.png() + ")");
+		</script>
 	</body>
 </html>

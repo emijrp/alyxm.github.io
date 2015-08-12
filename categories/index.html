@@ -32,7 +32,7 @@
 		<link rel="icon" sizes="32x32"   href="/images/favicon-32.png">
 		<link rel="icon" sizes="16x16"   href="/images/favicon-16.png">
 		
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/css/style.css">
 		
 		<link href="/atom.xml" type="application/atom+xml" rel="alternate" title="ATOM Feed">
@@ -69,17 +69,22 @@
 						<li >
 							<a href="/mim-theory/">MIM Theory</a>
 						</li>
-
-						<li >
-							<a href="/educational-resources/">Educational Resources</a>
-						</li>
 					</ul>
 				</div>
 			</div>
 		</nav>
 		
-		<div class="container content">
+		<div class="container">
 			<header>
+				<h1>
+					Categories
+					
+					
+				</h1>
+			</header>
+
+			<div class="content">
+				<!-- <header>
 	
 	
 	<h1>
@@ -87,7 +92,7 @@
 		
 		
 	</h1>
-</header>
+</header> -->
 
 <main>
 	 
@@ -179,50 +184,6 @@
 
 	</ul>
  
-	<h3 id="marxism">marxism</h3>
-	<ul>
-		  
-		
-
-
-	
-		
-			
-				<li><a href="/marxism/2014/08/14/western-dprk-propaganda/">Western DPRK Propaganda: The Worst, Occasionally Hilarious, and Often Racist, Lies</a></li>
-			
-		
-	
-
-	
-		
-			
-				<li><a href="/marxism/2014/05/17/history-of-the-dprk/">A History and Analysis of the DPRK</a></li>
-			
-		
-	
-
-	
-		
-			
-				<li><a href="/marxism/2014/04/29/notes-on-innovation-in-socialism/">13 Notes on Innovation in Socialism and Communism</a></li>
-			
-		
-	
-
-	
-		
-			
-				<li><a href="/marxism/2013/09/22/beginners-guide-to-thinking-critically-about-soviet-union/">A Brief Beginner's Guide to Thinking Critically About the pre-Khrushchev Soviet Union</a></li>
-			
-		
-	
-
-
-
-
-
-	</ul>
- 
 	<h3 id="capitalism">capitalism</h3>
 	<ul>
 		  
@@ -270,15 +231,53 @@
 
 
 	</ul>
+ 
+	<h3 id="marxism">marxism</h3>
+	<ul>
+		  
+		
+
+
+	
+		
+			
+				<li><a href="/marxism/2014/08/14/western-dprk-propaganda/">Western DPRK Propaganda: The Worst, Occasionally Hilarious, and Often Racist, Lies</a></li>
+			
+		
+	
+
+	
+		
+			
+				<li><a href="/marxism/2014/05/17/history-of-the-dprk/">A History and Analysis of the DPRK</a></li>
+			
+		
+	
+
+	
+		
+			
+				<li><a href="/marxism/2014/04/29/notes-on-innovation-in-socialism/">13 Notes on Innovation in Socialism and Communism</a></li>
+			
+		
+	
+
+
+
+
+
+	</ul>
 
 
 </main>
 
+			</div>
 		</div>
 		
 		<script src="/js/anchor.js"></script>
 		<script data-no-instant src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-		<script data-no-instant src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+		<script data-no-instant src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		<script data-no-instant src="https://cdnjs.cloudflare.com/ajax/libs/trianglify/0.2.1/trianglify.min.js"></script>
 		<script data-no-instant src="/js/instantclick.js"></script>
 		<script data-no-instant>
 			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -295,5 +294,15 @@
 			InstantClick.init();
 		</script>
 		<script>addAnchors();</script>
+		<script>
+			var pattern = Trianglify({
+				width: $("header").innerWidth(),
+				height: $("header").innerHeight(),
+				cell_size: 30,
+				x_colors: "RdYlBu",
+				y_colors: "match_x"
+			});
+			$("header").css("background-image", "url(" + pattern.png() + ")");
+		</script>
 	</body>
 </html>

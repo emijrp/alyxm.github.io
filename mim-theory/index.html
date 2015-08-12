@@ -29,7 +29,7 @@
 		<link rel="icon" sizes="32x32"   href="/images/favicon-32.png">
 		<link rel="icon" sizes="16x16"   href="/images/favicon-16.png">
 		
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/css/style.css">
 		
 		<link href="/atom.xml" type="application/atom+xml" rel="alternate" title="ATOM Feed">
@@ -66,31 +66,35 @@
 						<li  class="active" >
 							<a href="/mim-theory/">MIM Theory</a>
 						</li>
-
-						<li >
-							<a href="/educational-resources/">Educational Resources</a>
-						</li>
 					</ul>
 				</div>
 			</div>
 		</nav>
 		
-		<div class="container content">
+		<div class="container">
 			<header>
+				<h1>
+					MIM Theory
+					
+					
+				</h1>
+			</header>
+
+			<div class="content">
+				<!-- <header>
 	
 	
 	<h1>
 		MIM Theory
 		
 		
-			<br />
-			<small>Journal of the Maoist Internationalist Movement</small>
-		
 	</h1>
-</header>
+</header> -->
 
 <main>
-	<p>MIM were the first Maoist group in amerikkka to take a firm stand against heterosexism, and contributed hugely to Third Worldism, an “alter-globalisation” movement and discourse surrounding the destruction of the First World. The editors do not necessarily endorse everything contained within these journals, but we do think that it provides a valuable point of debate and departure, and are republishing these for their historical value.</p>
+	<p>The journal of the Maoist Internationalist Movement. Originally only available as scans, but now as fully-searchable and properly-typeset modern PDFs complete with updated graphics and functional PDF navigation.</p>
+
+<p>MIM were the first Maoist group in amerika to take a firm stand against heterosexism, and contributed hugely to Third Worldism, an “alter-globalisation” movement and discourse surrounding the destruction of the First World. The editors do not necessarily endorse everything contained within these journals, but we do think that it provides a valuable point of debate and departure, and are republishing these for their historical value.</p>
 
 <p>The original scans of the documents can be found at the <a href="http://www.prisoncensorship.info/archive/">MIM (Prisons)</a> website.</p>
 
@@ -124,11 +128,13 @@
 
 </main>
 
+			</div>
 		</div>
 		
 		<script src="/js/anchor.js"></script>
 		<script data-no-instant src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-		<script data-no-instant src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+		<script data-no-instant src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		<script data-no-instant src="https://cdnjs.cloudflare.com/ajax/libs/trianglify/0.2.1/trianglify.min.js"></script>
 		<script data-no-instant src="/js/instantclick.js"></script>
 		<script data-no-instant>
 			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -145,5 +151,15 @@
 			InstantClick.init();
 		</script>
 		<script>addAnchors();</script>
+		<script>
+			var pattern = Trianglify({
+				width: $("header").innerWidth(),
+				height: $("header").innerHeight(),
+				cell_size: 30,
+				x_colors: "RdYlBu",
+				y_colors: "match_x"
+			});
+			$("header").css("background-image", "url(" + pattern.png() + ")");
+		</script>
 	</body>
 </html>

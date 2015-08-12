@@ -37,7 +37,7 @@
 		<link rel="icon" sizes="32x32"   href="/images/favicon-32.png">
 		<link rel="icon" sizes="16x16"   href="/images/favicon-16.png">
 		
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 		<link rel="stylesheet" href="/css/style.css">
 		
 		<link href="/atom.xml" type="application/atom+xml" rel="alternate" title="ATOM Feed">
@@ -74,28 +74,30 @@
 						<li >
 							<a href="/mim-theory/">MIM Theory</a>
 						</li>
-
-						<li >
-							<a href="/educational-resources/">Educational Resources</a>
-						</li>
 					</ul>
 				</div>
 			</div>
 		</nav>
 		
-		<div class="container content">
+		<div class="container">
 			<header>
-	<img src="/images/2013-07-24-men-should-do-more-childcare-than-women/thumbnail.png" class="img-circle" style="width:150px; height:150px" />
+				<h1>
+					Men Should do More Childcare than Women
+					
+					
+				</h1>
+			</header>
+
+			<div class="content">
+				<!-- <header>
+	<img src="/images/2013-07-24-men-should-do-more-childcare-than-women/thumbnail.png" class="img-circle" style="width:150px; height:150px; margin: 10px auto" />
 	
 	<h1>
 		Men Should do More Childcare than Women
 		
 		
-			<br />
-			<small>Labor is labor</small>
-		
 	</h1>
-</header>
+</header> -->
 
 <!-- #### Attribution -->
 
@@ -130,11 +132,13 @@
 	</ul>
 </nav>
 
+			</div>
 		</div>
 		
 		<script src="/js/anchor.js"></script>
 		<script data-no-instant src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-		<script data-no-instant src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+		<script data-no-instant src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		<script data-no-instant src="https://cdnjs.cloudflare.com/ajax/libs/trianglify/0.2.1/trianglify.min.js"></script>
 		<script data-no-instant src="/js/instantclick.js"></script>
 		<script data-no-instant>
 			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -151,5 +155,15 @@
 			InstantClick.init();
 		</script>
 		<script>addAnchors();</script>
+		<script>
+			var pattern = Trianglify({
+				width: $("header").innerWidth(),
+				height: $("header").innerHeight(),
+				cell_size: 30,
+				x_colors: "RdYlBu",
+				y_colors: "match_x"
+			});
+			$("header").css("background-image", "url(" + pattern.png() + ")");
+		</script>
 	</body>
 </html>

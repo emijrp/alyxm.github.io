@@ -4,17 +4,9 @@ http://alyx.io/about/
 http://alyx.io/articles/
 http://alyx.io/atom.xml
 http://alyx.io/categories/
-http://alyx.io/educational-resources/class/
-http://alyx.io/educational-resources/disability/
-http://alyx.io/educational-resources/gender/
-http://alyx.io/educational-resources/general/
 http://alyx.io/
-http://alyx.io/educational-resources/
 http://alyx.io/mim-theory/
-http://alyx.io/educational-resources/race/
-http://alyx.io/educational-resources/sexuality/
 http://alyx.io/sitemap.txt
-http://alyx.io/educational-resources/trans/
 
 http://alyx.io/feminism/2015/06/14/is-gender-inherently-oppressive/
 http://alyx.io/feminism/2014/12/17/the-eroticisation-of-gender/
@@ -26,7 +18,6 @@ http://alyx.io/marxism/2014/05/17/history-of-the-dprk/
 http://alyx.io/marxism/2014/04/29/notes-on-innovation-in-socialism/
 http://alyx.io/programming/2014/03/02/ctrl-(shift)-tab-shortcut-in-gtk3/
 http://alyx.io/capitalism/2014/01/21/corporate-profit-world-hunger/
-http://alyx.io/marxism/2013/09/22/beginners-guide-to-thinking-critically-about-soviet-union/
 http://alyx.io/gnu/linux/2013/09/16/my-xmonad-config/
 http://alyx.io/feminism/2013/07/24/men-should-do-more-childcare-than-women/
 http://alyx.io/feminism/2013/07/01/trans-healthcare-nottingham-gender-clinic/
