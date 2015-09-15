@@ -4,6 +4,7 @@ http://alyx.io/about/
 http://alyx.io/articles/
 http://alyx.io/atom.xml
 http://alyx.io/categories/
+http://alyx.io/library/mackinnon/feminism-marxism-method-state/
 http://alyx.io/
 http://alyx.io/mim-theory/
 http://alyx.io/sitemap.txt
@@ -14,7 +15,6 @@ http://alyx.io/capitalism/2014/09/29/how-much-of-world-labour-is-performed-by-wo
 http://alyx.io/marxism/2014/08/14/western-dprk-propaganda/
 http://alyx.io/gnu/linux/2014/06/16/quotations-from-chairman-mao-unix-fortunes/
 http://alyx.io/feminism/2014/05/24/trans-people-and-dialectics-of-sex-and-gender/
-http://alyx.io/marxism/2014/05/17/history-of-the-dprk/
 http://alyx.io/marxism/2014/04/29/notes-on-innovation-in-socialism/
 http://alyx.io/programming/2014/03/02/ctrl-(shift)-tab-shortcut-in-gtk3/
 http://alyx.io/capitalism/2014/01/21/corporate-profit-world-hunger/

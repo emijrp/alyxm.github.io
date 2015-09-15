@@ -17,7 +17,7 @@ header {
 }
 
 .content {
-	padding: 25px 25px 20px;
+	padding: 25px 30px 20px;
 	background-color: #FFF;
 }
 
@@ -29,8 +29,8 @@ header {
 }
 
 .navbar > .container {
-	padding-left:  20px;
-	padding-right: 20px;
+	padding-left:  30px;
+	padding-right: 30px;
 }
 
 /* pagination */
@@ -56,29 +56,21 @@ h3 { font-size: 20px; }
 h4 { font-size: 16px; font-weight: bold; }
 
 h2, h3, h4 { 
-	margin-top: 20px;
-	margin-bottom: 10px;
+	margin-top: 1.5em;
+	margin-bottom: 0.75em;
+	text-align: left;
 }
 
-.content p, .content li {
-	font-size: 15px;
-	line-height: 25px;
-}
-
-blockquote {
+.content, blockquote {
+	font-size: 16px;
+	line-height: 27px;
+	text-align: justify;
 	margin-bottom: 1em;
-	margin-top: 1em
+	margin-top: 0em;
 }
 
 /* footnote */
 /* ########################################################################## */
-/* the markdown processor wraps the footnote text inside a <p> tag, leaving the
- * hash jump link outside the tag, adding an extraneous new line between them */
-.footnotes p {
-	display: inline;
-	font-size: 13px;
-}
-
 .footnote::before { content: "["; }
 .footnote::after  { content: "]"; }
 
