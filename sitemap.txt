@@ -4,7 +4,7 @@ http://alyx.io/about/
 http://alyx.io/articles/
 http://alyx.io/atom.xml
 http://alyx.io/categories/
-http://alyx.io/library/mackinnon/feminism-marxism-method-state/
+http://alyx.io/library/mackinnon/feminism-marxism-method-state-1/
 http://alyx.io/
 http://alyx.io/mim-theory/
 http://alyx.io/sitemap.txt
