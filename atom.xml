@@ -764,7 +764,7 @@
 
 &lt;hr /&gt;
 
-&lt;p&gt;&lt;center&gt;&lt;b&gt;xmonad.hs&lt;/b&gt;&lt;/center&gt;&lt;/p&gt;
+&lt;p class=&quot;text-center&quot;&gt;&lt;b&gt;xmonad.hs&lt;/b&gt;&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-haskell&quot; data-lang=&quot;haskell&quot;&gt;&lt;span class=&quot;kr&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;XMonad&lt;/span&gt;
 &lt;span class=&quot;kr&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;XMonad.Config.Gnome&lt;/span&gt;
