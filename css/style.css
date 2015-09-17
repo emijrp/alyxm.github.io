@@ -61,7 +61,7 @@ h2, h3, h4 {
 	text-align: left;
 }
 
-.content, blockquote {
+p, blockquote, ol, ul {
 	font-size: 16px;
 	line-height: 27px;
 	text-align: justify;
@@ -73,6 +73,7 @@ h2, h3, h4 {
 /* ########################################################################## */
 .footnote::before { content: "["; }
 .footnote::after  { content: "]"; }
+.footnotes p { display: inline; }
 
 /* images */
 /* ########################################################################## */
