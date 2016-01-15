@@ -8,12 +8,12 @@ header {
 	background-color: #F5F5F5;
 	text-align: center;
 	border-bottom: 5px #222 solid;
-	position: relative;
 }
 
 .container {
 	max-width: 720px;
 	padding: 0px;
+	position: relative;
 }
 
 .content {
@@ -42,7 +42,7 @@ header {
 /* typography */
 /* ########################################################################## */
 h1, h1 > small {
-	line-height: 1.15;
+	line-height: 1.1;
 	margin: 0px auto;
 	padding: 50px;
 	color: #333;

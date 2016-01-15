@@ -77,7 +77,7 @@
 		
 		<div class="container">
 			<header>
-				<canvas style="position: absolute; left: 50%; transform: translate(-50%, 0%);" id="header-canvas"></canvas>
+				<canvas style="position: absolute; transform: translate(-50%, 0%); width: parent; height: parent" id="header-canvas"></canvas>
 				<h1 style="position: relative">
 					Feminism, Marxism, Method, and the State: Toward Feminist Jurisprudece
 					
@@ -385,8 +385,9 @@
 				width: $("header").innerWidth(),
 				height: $("header").innerHeight(),
 				cell_size: 30,
+				variance: Math.random(),
 				x_colors: "random",
-				y_colors: "match_x"
+				y_colors: "random"
 			});
 			// $("header").css("background-image", "url(" + pattern.png() + ")");
 			pattern.canvas(document.getElementById('header-canvas'));
