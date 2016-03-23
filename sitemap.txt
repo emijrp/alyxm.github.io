@@ -6,6 +6,7 @@ http://alyx.io/atom.xml
 http://alyx.io/categories/
 http://alyx.io/library/mackinnon/feminism-marxism-method-state-1/
 http://alyx.io/library/mackinnon/feminism-marxism-method-state-2/
+http://alyx.io/library/mackinnon/from-practice-theory/
 http://alyx.io/
 http://alyx.io/library/
 http://alyx.io/library/mackinnon/
